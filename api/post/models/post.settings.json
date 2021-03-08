@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "name": "Post",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "post_content": {
+      "type": "text",
+      "required": true,
+      "unique": true
+    },
+    "main_image": {
+      "type": "string"
+    },
+    "category": {
+      "model": "category"
+    },
+    "author": {
+      "model": "author"
+    }
+  }
+}
