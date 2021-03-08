@@ -15,6 +15,7 @@ Icon
 .editorconfig
 .eslintrc
 .eslintignore
+/frontend/.next
 
 
 ############################
