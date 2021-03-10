@@ -1,18 +1,16 @@
 import React from "react";
 
-const Card = () => {
+const Card = ({ post }) => {
   return (
     <>
       <div className="card" style={{ width: "18rem" }}>
-        <img src="..." className="card-img-top" alt="..." />
+        <img src={post.main_image} className="card-img-top" alt="..." />
         <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+          <h5 className="card-title">{post.title}</h5>
+          <p className="text-primary">{post.users_permissions_user.username}</p>
+          <p className="card-text">{post.post_content.substr(0, 100)}...</p>
           <a href="#" className="btn btn-primary">
-            Go somewhere
+            Read More
           </a>
         </div>
       </div>

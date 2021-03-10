@@ -4,8 +4,8 @@ const PostsList = ({ posts }) => {
   return (
     <>
       {posts.map((post) => (
-        <div className="col mt-3">
-          <Card />
+        <div className="col-md-4 mt-3">
+          <Card post={post} />
         </div>
       ))}
       {/* <div className="col-md mt-3">
