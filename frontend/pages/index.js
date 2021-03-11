@@ -4,9 +4,9 @@ function Home({ posts }) {
   return (
     <>
       <div className="text-center">
-        <Link href="www.google.com">Sign Up</Link>
+        <Link href="/signup">Sign Up</Link>
         <br />
-        <Link href="www.google.com">Login</Link>
+        <Link href="/login">Login</Link>
       </div>
       <h2 style={{ fontFamily: "monospace" }}>All Posts</h2>
       <div className="row">

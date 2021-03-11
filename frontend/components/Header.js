@@ -11,7 +11,7 @@ const Header = () => {
         <a href="https://github.com/ahmadbenos/strapi-nextjs-blog">
           By Ahmad Tarabein
           <span className="text-dark">
-            <i class="fab fa-github"></i>
+            <i className="fab fa-github"></i>
           </span>
         </a>
       </p>
