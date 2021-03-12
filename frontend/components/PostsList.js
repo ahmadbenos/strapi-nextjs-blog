@@ -8,15 +8,6 @@ const PostsList = ({ posts }) => {
           <Card post={post} />
         </div>
       ))}
-      {/* <div className="col-md mt-3">
-        <Card />
-      </div>
-      <div className="col-md mt-3">
-        <Card />
-      </div>
-      <div className="col-md mt-3">
-        <Card />
-      </div> */}
     </>
   );
 };

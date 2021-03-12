@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Link from "next/link";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,6 +47,11 @@ const Login = () => {
         <button type="submit" className="btn btn-primary">
           Login
         </button>
+        <br />
+
+        <Link href="/" className="text-white">
+          <a className="text-white btn btn-danger mt-2">Cancel</a>
+        </Link>
       </form>
     </>
   );
