@@ -15,8 +15,8 @@ const Signup = () => {
   const [confirmedPass, setConfirmedPass] = useState("");
   async function registerUser(e) {
     e.preventDefault();
+    dispatch(setError(""));
     dispatch(setLoading(true));
-    //dispatch(setError(""));
     if (password !== confirmedPass) {
       dispatch(setLoading(false));
       dispatch(setError("Passwords don't match!"));
