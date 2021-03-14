@@ -10,3 +10,10 @@ export const setLoading = (state) => {
     type: state.toString(),
   };
 };
+
+export const setError = (error) => {
+  return {
+    type: "error",
+    payload: error,
+  };
+};

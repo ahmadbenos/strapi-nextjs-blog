@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      {isLoading ? (
+      {!isLoading ? (
         <>
           <div className="container">{children}</div>
         </>

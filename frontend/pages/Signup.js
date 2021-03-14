@@ -2,21 +2,26 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser, setLoading } from "../context/actions/index";
+import Error from "../components/Error";
+import { setUser, setLoading, setError } from "../context/actions/index";
 
 const Signup = () => {
+  const error = useSelector((state) => state.errorState);
   const router = useRouter();
   const dispatch = useDispatch();
-  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPass, setConfirmedPass] = useState("");
   async function registerUser(e) {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-    if (password !== confirmedPass) return setError("Passwords don't match!");
+    dispatch(setLoading(true));
+    //dispatch(setError(""));
+    if (password !== confirmedPass) {
+      dispatch(setLoading(false));
+      dispatch(setError("Passwords don't match!"));
+      return;
+    }
     const userInfo = {
       username,
       email,
@@ -35,33 +40,20 @@ const Signup = () => {
       const newUser = {
         username: data.user.username,
       };
-      dispatch(setUser(newUser, "login")); //{ type: "USER_LOGIN", payload: newUser });
+      dispatch(setUser(newUser, "login"));
+      dispatch(setLoading(false));
       router.push("/");
     } else {
       // we can of course handle error more efficiently by using several status code
       // and also get the error message the server responds with! But error handling is not #1 focus in this project
-      setError("Email/username already taken!");
+      dispatch(setLoading(false));
+      dispatch(setError("Email/username already taken!"));
       console.log("an error occured!");
     }
   }
   return (
     <>
-      {error && (
-        <div
-          className="alert alert-danger alert-dismissible fade show"
-          role="alert"
-        >
-          {error}
-          <button
-            type="button"
-            className="close"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      )}
+      {error && <Error error={error} />}
       <form onSubmit={registerUser}>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Username</label>
