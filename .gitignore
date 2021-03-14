@@ -108,7 +108,7 @@ node_modules
 
 testApp
 coverage
-
+./db
 ############################
 # Strapi
 ############################

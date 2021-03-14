@@ -1,5 +1,6 @@
 import PostsList from "../components/PostsList";
 import Link from "next/link";
+
 function Home({ posts }) {
   return (
     <>
