@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import Error from "../components/Error";
 import { setUser, setLoading, setError } from "../context/actions/index";
+import jwt from "jsonwebtoken";
 
 const Signup = () => {
   const error = useSelector((state) => state.errorState);
@@ -27,6 +28,7 @@ const Signup = () => {
       email,
       password,
     };
+
     const res = await fetch("http://localhost:1337/auth/local/register", {
       method: "POST",
       headers: {
@@ -37,18 +39,21 @@ const Signup = () => {
     const data = await res.json();
     if (res.status == 200) {
       localStorage.setItem("token", data.jwt);
+      const decoded = jwt.decode(data.jwt, { complete: true });
+      const { exp, id, iat } = decoded.payload;
       const newUser = {
-        username: data.user.username,
+        exp,
+        id,
+        iat,
       };
       dispatch(setUser(newUser, "login"));
-      dispatch(setLoading(false));
       router.push("/");
+      dispatch(setLoading(false));
     } else {
       // we can of course handle error more efficiently by using several status code
       // and also get the error message the server responds with! But error handling is not #1 focus in this project
       dispatch(setLoading(false));
       dispatch(setError("Email/username already taken!"));
-      console.log("an error occured!");
     }
   }
   return (

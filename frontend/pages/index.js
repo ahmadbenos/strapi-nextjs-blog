@@ -1,7 +1,11 @@
 import PostsList from "../components/PostsList";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 function Home({ posts }) {
+  const token = useSelector((state) => state.authstate);
+  //const { exp, id, iat } = token.user;
+  console.log(token);
   return (
     <>
       <div className="text-center">

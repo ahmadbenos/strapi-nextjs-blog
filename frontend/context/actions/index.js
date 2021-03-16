@@ -17,3 +17,10 @@ export const setError = (error) => {
     payload: error,
   };
 };
+
+// export const setUserAuth = (data) => {
+//   return {
+//     type: "USER_LOGIN",
+//     payload: data,
+//   };
+// };
