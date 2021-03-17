@@ -12,7 +12,7 @@ const authReducer = (state = initialState, action) => {
       };
     case "USER_LOGOUT":
       return {
-        ...state,
+        user: {},
         islogged: false,
       };
     default:

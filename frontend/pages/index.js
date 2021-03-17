@@ -1,12 +1,17 @@
 import PostsList from "../components/PostsList";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser, setLoading } from "../context/actions";
 
 function Home({ posts }) {
+  const dispatch = useDispatch();
   const authState = useSelector((state) => state.authState);
   const user = authState.user;
   function signOut(e) {
+    dispatch(setLoading(true));
     localStorage.removeItem("token");
+    dispatch(setUser("anything here", "USER_LOGOUT"));
+    dispatch(setLoading(false));
   }
   //const { exp, id, iat } = token.user;
   return (
