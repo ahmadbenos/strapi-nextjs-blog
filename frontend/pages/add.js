@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { setError, setLoading } from "../context/actions";
@@ -68,6 +68,13 @@ const add = () => {
       dispatch(setError("An error occured!"));
     }
   };
+
+  //redirect user to homepage if he's not logged in
+  useEffect(() => {
+    if (!user.hasOwnProperty("iat")) {
+      router.push("/");
+    }
+  }, []);
   return (
     <>
       <h1 className="display-4">Add a new Post</h1>

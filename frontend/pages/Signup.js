@@ -14,6 +14,7 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPass, setConfirmedPass] = useState("");
+
   async function registerUser(e) {
     e.preventDefault();
     dispatch(setError(""));
@@ -38,16 +39,6 @@ const Signup = () => {
     });
     const data = await res.json();
     if (res.status == 200) {
-      localStorage.setItem("token", data.jwt);
-      const decoded = jwt.decode(data.jwt, { complete: true });
-      const { exp, id, iat } = decoded.payload;
-      const newUser = {
-        exp,
-        id,
-        iat,
-        username,
-      };
-      //dispatch(setUser(newUser, "login"));
       router.push("/");
       dispatch(setLoading(false));
     } else {
@@ -57,6 +48,7 @@ const Signup = () => {
       dispatch(setError("Email/username already taken!"));
     }
   }
+
   return (
     <>
       {error && <Error error={error} />}

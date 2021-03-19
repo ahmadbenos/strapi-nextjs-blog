@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Header from "./Header";
+import Head from "next/head";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoading, setUser } from "../context/actions";
 import jwt from "jsonwebtoken";
-import useSwr from "swr";
 
 const Layout = ({ children }) => {
   // const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -29,6 +29,9 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <Head>
+        <title>Next/Strapi Blog</title>
+      </Head>
       <Header />
       {!isLoading ? (
         <>

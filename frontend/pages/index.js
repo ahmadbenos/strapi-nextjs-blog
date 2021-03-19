@@ -13,7 +13,7 @@ function Home({ posts }) {
     dispatch(setUser("anything here", "USER_LOGOUT"));
     dispatch(setLoading(false));
   }
-  //const { exp, id, iat } = token.user;
+
   return (
     <>
       {!user.hasOwnProperty("iat") ? (
