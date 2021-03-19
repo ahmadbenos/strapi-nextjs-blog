@@ -31,6 +31,10 @@ function Home({ posts }) {
           >
             Signout
           </a>
+          <br />
+          <Link href="/add">
+            <button className="btn btn-primary">Add Post</button>
+          </Link>
         </div>
       )}
       <h2 style={{ fontFamily: "monospace" }}>All Posts</h2>

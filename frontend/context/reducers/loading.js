@@ -5,7 +5,7 @@ const loadingState = (state = true, action) => {
     case "false":
       return false;
     default:
-      return true;
+      return state;
   }
 };
 

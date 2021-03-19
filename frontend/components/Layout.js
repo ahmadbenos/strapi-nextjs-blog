@@ -9,18 +9,20 @@ const Layout = ({ children }) => {
   // const fetcher = (url) => fetch(url).then((res) => res.json());
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.loading);
+  const error = useSelector((state) => state.errorState);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token !== null) {
       const decoded = jwt.decode(token, { complete: true });
       const { exp, id, iat } = decoded.payload;
-      fetch(`http://localhost:1337/users/${id}`).then((res) =>
-        console.log(res.status)
-      );
-      if (exp * 1000 > Date.now()) {
-        const user = { exp, id, iat };
-        dispatch(setUser(user, "login"));
-      }
+      fetch(`http://localhost:1337/users/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (exp * 1000 > Date.now()) {
+            const user = { exp, id, iat, username: data.username };
+            dispatch(setUser(user, "login"));
+          }
+        });
     }
     dispatch(setLoading(false));
   }, []);

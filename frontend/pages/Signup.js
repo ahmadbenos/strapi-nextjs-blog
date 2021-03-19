@@ -45,6 +45,7 @@ const Signup = () => {
         exp,
         id,
         iat,
+        username,
       };
       dispatch(setUser(newUser, "login"));
       router.push("/");
