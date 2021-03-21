@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setError, setLoading } from "../context/actions";
 import { useRouter } from "next/router";
 
+// function to determine the id of the category the user inputs
+//ids are generated in the strapi content manager, so the ids must match with each category in strapi
 function getCategoryID(category) {
   switch (category) {
     case "tech":
@@ -30,11 +32,17 @@ const add = () => {
   const [content, setContent] = useState("");
   const [imgLink, setImgLink] = useState("");
   const [category, setCategory] = useState("");
+
   const submitPost = async (e) => {
     dispatch(setError(""));
     dispatch(setLoading(true));
     e.preventDefault();
+
+    //retreive the jwt token
     const token = localStorage.getItem("token");
+
+    // this is the strapi required fields data submission,id must match the category
+    // generated in strapi content manage when you first created the backend
     const newPost = {
       title,
       post_content: content,
@@ -51,6 +59,9 @@ const add = () => {
         provider: "local",
       },
     };
+
+    // add the jwt token in the request bearer token header to ensure
+    // that the request is still from a valid user
     const res = await fetch("http://localhost:1337/posts", {
       method: "POST",
       headers: {
@@ -59,7 +70,7 @@ const add = () => {
       },
       body: JSON.stringify(newPost),
     });
-    //const data = await res.json();
+    //if success redirect to homepage
     if (res.status == 200) {
       dispatch(setLoading(false));
       router.push("/");
@@ -69,7 +80,13 @@ const add = () => {
     }
   };
 
-  //redirect user to homepage if he's not logged in
+  //redirect user to homepage if he's not logged in in case he tries to access
+  // the page from the browser url search bar, i did it just by checking if the current user in the
+  // redux store has an iat property(means to check if there's a user since an empty objetc return 'true')
+  // of course, this can be handled in a better way but just for the time being i did this
+
+  //by better way i mean that we can get the user id from store, send request to server to check if that id is found
+  //in the database
   useEffect(() => {
     if (!user.hasOwnProperty("iat")) {
       router.push("/");

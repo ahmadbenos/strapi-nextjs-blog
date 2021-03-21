@@ -6,6 +6,8 @@ class MyDocument extends Document {
     return { ...initialProps };
   }
 
+  //add bootstrap and en language attribute to HTML tag, this is the nextjs way to edit these html tags
+  //by editing the _document.js page
   render() {
     return (
       <Html lang="en">

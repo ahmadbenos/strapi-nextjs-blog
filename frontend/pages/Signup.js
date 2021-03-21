@@ -3,8 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import Error from "../components/Error";
-import { setUser, setLoading, setError } from "../context/actions/index";
-import jwt from "jsonwebtoken";
+import { setLoading, setError } from "../context/actions/index";
 
 const Signup = () => {
   const error = useSelector((state) => state.errorState);
@@ -17,8 +16,11 @@ const Signup = () => {
 
   async function registerUser(e) {
     e.preventDefault();
+    //reset error state to '' and loading state to true
     dispatch(setError(""));
     dispatch(setLoading(true));
+
+    //show error if passwords dont match
     if (password !== confirmedPass) {
       dispatch(setLoading(false));
       dispatch(setError("Passwords don't match!"));
@@ -29,7 +31,7 @@ const Signup = () => {
       email,
       password,
     };
-
+    //send user info to strapi to register
     const res = await fetch("http://localhost:1337/auth/local/register", {
       method: "POST",
       headers: {
@@ -39,7 +41,7 @@ const Signup = () => {
     });
     const data = await res.json();
     if (res.status == 200) {
-      router.push("/");
+      router.push("/"); //redirect to homepage
       dispatch(setLoading(false));
     } else {
       // we can of course handle error more efficiently by using several status code

@@ -29,7 +29,9 @@ const post = ({ post }) => {
   );
 };
 
-export const getStaticProps = async (context) => {
+// get the page initial props by using server side rendering, means the page is generated on the
+//server at first. The function should return props object with the props
+export const getServerSideProps = async (context) => {
   const res = await fetch(`http://localhost:1337/posts/${context.params.id}`);
   const main_post = await res.json();
 
@@ -40,18 +42,33 @@ export const getStaticProps = async (context) => {
   };
 };
 
-export const getStaticPaths = async () => {
-  const res = await fetch(`http://localhost:1337/posts/`);
-  const posts = await res.json();
+//! Below is a sample for static site generation including dynamic paths
+//! the way we do it is by exporting a function called getStaticPaths and create
+//! an array that includes the params and other info
 
-  const allPaths = posts
-    .map((curr) => curr.id)
-    .map((id) => ({ params: { id: id.toString() } }));
+// export const getStaticProps = async (context) => {
+//   const res = await fetch(`http://localhost:1337/posts/${context.params.id}`);
+//   const main_post = await res.json();
 
-  return {
-    paths: allPaths,
-    fallback: false, // return a 404 page if id not found
-  };
-};
+//   return {
+//     props: {
+//       post: main_post,
+//     },
+//   };
+// };
+
+// export const getStaticPaths = async () => {
+//   const res = await fetch(`http://localhost:1337/posts/`);
+//   const posts = await res.json();
+
+//   const allPaths = posts
+//     .map((curr) => curr.id)
+//     .map((id) => ({ params: { id: id.toString() } }));
+
+//   return {
+//     paths: allPaths,
+//     fallback: false, // return a 404 page if id not found
+//   };
+// };
 
 export default post;

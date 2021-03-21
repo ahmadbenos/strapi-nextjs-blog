@@ -1,3 +1,5 @@
+//this is the authentication reducer
+
 const initialState = {
   islogged: false,
   user: {},

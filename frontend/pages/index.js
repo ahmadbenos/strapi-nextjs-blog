@@ -7,9 +7,13 @@ function Home({ posts }) {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.authState);
   const user = authState.user;
+
+  //signout function
   function signOut(e) {
     dispatch(setLoading(true));
+    //remove the token from localstorage
     localStorage.removeItem("token");
+    //remove the current user from redux store
     dispatch(setUser("anything here", "USER_LOGOUT"));
     dispatch(setLoading(false));
   }
@@ -45,7 +49,7 @@ function Home({ posts }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(`http://localhost:1337/posts`);
   const posts = await res.json();
   return {
@@ -54,5 +58,18 @@ export async function getStaticProps() {
     },
   };
 }
+
+//! This is a sample to use in static generation site
+//! generate at build time the initial props
+
+// export async function getStaticProps() {
+//   const res = await fetch(`http://localhost:1337/posts`);
+//   const posts = await res.json();
+//   return {
+//     props: {
+//       posts,
+//     },
+//   };
+// }
 
 export default Home;

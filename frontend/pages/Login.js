@@ -9,20 +9,25 @@ import jwt from "jsonwebtoken";
 const Login = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  //get error state from redux store
   const error = useSelector((state) => state.errorState);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   async function onLoginSubmit(e) {
     e.preventDefault();
+    //reset error state to empty and loading to true
     dispatch(setError(""));
     dispatch(setLoading(true));
+
+    //show error if missing fields
     if (password == "" || email == "") {
       dispatch(setLoading(false));
       dispatch(setError("Fill in all info"));
       return;
     }
 
+    //strapi login form info
     const loginRequest = {
       identifier: email,
       password,
@@ -36,7 +41,10 @@ const Login = () => {
     });
     const data = await res.json();
     if (res.status == 200) {
+      //on success, save the jwt you from the server in localstorage(or cookie)
       localStorage.setItem("token", data.jwt);
+
+      //decode the jwt to save the exp, id, iat in app state
       const decoded = jwt.decode(data.jwt, { complete: true });
       const { exp, id, iat } = decoded.payload;
       const newUser = {
@@ -45,6 +53,7 @@ const Login = () => {
         iat,
         username: data.user.username,
       };
+      //dispatch the setUser function to save the logged in user in the app's state
       dispatch(setUser(newUser, "login"));
       router.push("/");
       dispatch(setLoading(false));

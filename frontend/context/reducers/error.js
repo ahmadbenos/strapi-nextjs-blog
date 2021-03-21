@@ -1,3 +1,4 @@
+//error reducer, really simple
 const errorState = (state = "", action) => {
   switch (action.type) {
     case "error":

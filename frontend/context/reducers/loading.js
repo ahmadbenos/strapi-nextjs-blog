@@ -1,3 +1,5 @@
+//loading state reducer, also really simple
+
 const loadingState = (state = true, action) => {
   switch (action.type) {
     case "true":
