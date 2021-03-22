@@ -8,7 +8,7 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "dev": "concurrently \" npm run start\" \"npm run dev --prefix frontend\" "
+    "dev": "concurrently \" npm run start\" \"npm run start --prefix frontend\" "
   },
   "devDependencies": {},
   "dependencies": {
