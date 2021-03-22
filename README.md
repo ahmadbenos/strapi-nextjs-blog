@@ -15,7 +15,7 @@ Conclusion: Strapi is cool to use for a quick API construction. I also liked the
 ## Installation
 
 ```bash
-git clone
+git clone https://github.com/ahmadbenos/strapi-nextjs-blog.git
 ```
 
 ```bash
