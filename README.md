@@ -1,4 +1,6 @@
-# Description
+# Demo Video
+
+![demo](strapi-tut.webp)
 
 A very basic blog built using Nextjs and Strapi headless CMS framework for backend management. I wasn't able to host the demo on a free hosting provider since the strapi and the nextjs are large to be hosted for free. You can still clone the project though :p
 

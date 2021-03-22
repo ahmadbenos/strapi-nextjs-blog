@@ -1,19 +1,19 @@
 module.exports = ({ env }) => ({
-  defaultConnection: 'default',
+  defaultConnection: "default",
   connections: {
     default: {
-      connector: 'mongoose',
+      connector: "mongoose",
       settings: {
-        host: env('DATABASE_HOST', 'test-cluster.ok0f6.mongodb.net'),
-        srv: env.bool('DATABASE_SRV', true),
-        port: env.int('DATABASE_PORT', 1),
-        database: env('DATABASE_NAME', 'strapi_nextjs_blog'),
-        username: env('DATABASE_USERNAME', 'ahmadbenos'),
-        password: env('DATABASE_PASSWORD', 'va3MZDbTERqMEsjh'),
+        host: env("DATABASE_HOST", "enter your mongodb host link here"),
+        srv: env.bool("DATABASE_SRV", true),
+        port: env.int("DATABASE_PORT", 1),
+        database: env("DATABASE_NAME", "enter db name here"),
+        username: env("DATABASE_USERNAME", "enter db username"),
+        password: env("DATABASE_PASSWORD", "etner db password"),
       },
       options: {
-        authenticationDatabase: env('AUTHENTICATION_DATABASE', null),
-        ssl: env.bool('DATABASE_SSL', true),
+        authenticationDatabase: env("AUTHENTICATION_DATABASE", null),
+        ssl: env.bool("DATABASE_SSL", true),
       },
     },
   },
